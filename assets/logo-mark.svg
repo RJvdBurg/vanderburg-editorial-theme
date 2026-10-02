@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" role="img" aria-labelledby="title desc">
+<title id="title">Van der Burg monogram</title><desc id="desc">Reconstructed interlocking monogram inspired by supplied brand reference.</desc>
+<g fill="#0D3B3A">
+  <!-- upper bowl -->
+  <path d="M78 24h54c46 0 76 24 76 61 0 29-18 49-49 57 38 8 59 31 59 65 0 43-33 69-86 69H78v-22h18V46H78V24zm57 100c28 0 45-13 45-36 0-22-17-36-45-36h-11v72h11zm3 130c32 0 51-16 51-46 0-29-19-45-51-45h-14v91h14z"/>
+  <!-- counter-cut illusion / vertical white cut done with background-colored paths in variants -->
+</g>
+</svg>
