@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<title id="title">Van der Burg primary logo on light background</title><desc id="desc">Reconstructed logo lockup inspired by supplied brand reference.</desc>
+
+<g transform="translate(495 32) scale(.62)" fill="#0D3B3A">
+  <path d="M78 24h54c46 0 76 24 76 61 0 29-18 49-49 57 38 8 59 31 59 65 0 43-33 69-86 69H78v-22h18V46H78V24zm57 100c28 0 45-13 45-36 0-22-17-36-45-36h-11v72h11zm3 130c32 0 51-16 51-46 0-29-19-45-51-45h-14v91h14z"/>
+</g>
+<text x="600" y="280" text-anchor="middle" fill="#1F1F1F" font-family="Montserrat, Arial, sans-serif" font-size="74" font-weight="400" letter-spacing="18">VAN DER BURG</text>
+<text x="600" y="345" text-anchor="middle" fill="#1F1F1F" font-family="Montserrat, Arial, sans-serif" font-size="28" font-weight="400" letter-spacing="8">RELATIETHERAPIE • COACHING • TRAINING</text>
+<line x1="560" x2="640" y1="380" y2="380" stroke="#5F9E9A" stroke-width="3"/>
+</svg>
