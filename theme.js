@@ -223,6 +223,51 @@
       });
     }
 
+    /* Ervaringen-carousel: wisselt automatisch (data-interval, standaard 7 s); pauzeert bij muis/focus en verborgen tab */
+    [].forEach.call(document.querySelectorAll('.hp-carousel'), function (car) {
+      var slides = [].slice.call(car.querySelectorAll('.hp-slide'));
+      var dotsWrap = car.querySelector('.hp-dots');
+      if (slides.length < 2 || !dotsWrap) return;
+      var ms = parseInt(car.getAttribute('data-interval') || '7000', 10) || 7000;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var cur = 0, timer = null, hover = false, focus = false;
+      dotsWrap.innerHTML = '';
+      var dots = slides.map(function (s, n) {
+        s.setAttribute('aria-roledescription', 'slide');
+        s.setAttribute('aria-label', (n + 1) + ' van ' + slides.length);
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'hp-dot';
+        b.setAttribute('aria-label', 'Toon ervaring ' + (n + 1) + ' van ' + slides.length);
+        b.addEventListener('click', function () { show(n); play(); });
+        dotsWrap.appendChild(b);
+        return b;
+      });
+      function show(n) {
+        cur = (n + slides.length) % slides.length;
+        slides.forEach(function (s, k) {
+          var on = k === cur;
+          s.classList.toggle('is-active', on);
+          s.setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        dots.forEach(function (d, k) { d.setAttribute('aria-current', k === cur ? 'true' : 'false'); });
+      }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      function play() {
+        stop();
+        if (reduce || hover || focus || document.hidden) return;
+        timer = setInterval(function () { show(cur + 1); }, ms);
+      }
+      car.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { hover = true; stop(); } });
+      car.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { hover = false; play(); } });
+      car.addEventListener('focusin', function () { focus = true; stop(); });
+      car.addEventListener('focusout', function (e) { if (!car.contains(e.relatedTarget)) { focus = false; play(); } });
+      document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else play(); });
+      car.classList.add('is-ready');
+      show(0);
+      requestAnimationFrame(function () { requestAnimationFrame(function () { car.classList.add('is-anim'); }); });
+      play();
+    });
+
     var cform = document.getElementById('contactForm');
     if (cform) {
       cform.addEventListener('submit', function (e) {
