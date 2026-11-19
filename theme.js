@@ -116,7 +116,7 @@
     return '<header class="site-header" id="siteHeader">' +
       '<nav class="nav">' +
         '<a href="index.html" class="logo" aria-label="' + esc(cfg.brand) + ' home">' +
-          '<img src="' + (cfg.logo || DEF_LOGO) + '" alt="' + esc(cfg.logoAlt || cfg.brand) + '"' + fb(DEF_LOGO) + '></a>' +
+          '<img src="' + (cfg.logoMark || cfg.logoWhite || DEF_LOGO_WHITE) + '" alt="' + esc(cfg.logoAlt || cfg.brand) + '"' + fb(DEF_LOGO_WHITE) + '></a>' +
         '<ul class="nav-links">' + links + '</ul>' +
         (cta.label ? '<a href="' + (cta.href || 'contact.html') + '" class="btn btn-cta cta">' + esc(cta.label) + '</a>' : '') +
         '<button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">' +
@@ -171,12 +171,11 @@
     if (h) {
       var RAMP = 120;
       var onScroll = function () {
+        /* Editorial: vaste donker-teal masthead — niet witwassen; alleen schaduw bij scrollen. */
         var t = Math.min(Math.max(window.scrollY, 0) / RAMP, 1);
-        h.style.background = 'rgba(255,255,255,' + (t * 0.97).toFixed(3) + ')';
-        var blur = 'blur(' + (t * 12).toFixed(2) + 'px)';
-        h.style.backdropFilter = blur; h.style.webkitBackdropFilter = blur;
-        h.style.boxShadow = t > 0.02 ? ('0 2px 16px rgba(62,46,109,' + (t * 0.10).toFixed(3) + ')') : 'none';
-        h.style.borderBottomColor = 'rgba(240,240,240,' + t.toFixed(3) + ')';
+        h.style.background = 'rgba(4,44,47,' + (t * 0.97).toFixed(3) + ')';
+        h.style.boxShadow = t > 0.02 ? ('0 2px 18px rgba(4,44,47,' + (t * 0.28).toFixed(3) + ')') : 'none';
+        h.style.borderBottomColor = 'rgba(245,239,233,' + (t * 0.14).toFixed(3) + ')';
       };
       window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
     }
