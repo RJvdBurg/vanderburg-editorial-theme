@@ -238,17 +238,26 @@
         var b = document.createElement('button');
         b.type = 'button'; b.className = 'hp-dot';
         b.setAttribute('aria-label', 'Toon ervaring ' + (n + 1) + ' van ' + slides.length);
-        b.addEventListener('click', function () { show(n); play(); });
+        b.addEventListener('click', function () { if (n !== cur) show(n, n < cur); play(); });
         dotsWrap.appendChild(b);
         return b;
       });
-      function show(n) {
-        cur = (n + slides.length) % slides.length;
+      var leaveT = null;
+      function show(n, back) {
+        var next = (n + slides.length) % slides.length;
+        var prev = cur;
+        if (leaveT) { clearTimeout(leaveT); leaveT = null; }
+        slides.forEach(function (s) { s.classList.remove('is-leaving'); });
+        car.classList.toggle('is-back', !!back);
+        void car.offsetWidth; /* wachtpositie (rechts, of links bij terug) eerst vastzetten */
+        cur = next;
         slides.forEach(function (s, k) {
           var on = k === cur;
+          if (k === prev && !on && car.classList.contains('is-anim')) s.classList.add('is-leaving');
           s.classList.toggle('is-active', on);
           s.setAttribute('aria-hidden', on ? 'false' : 'true');
         });
+        leaveT = setTimeout(function () { slides.forEach(function (s) { s.classList.remove('is-leaving'); }); }, 1200);
         dots.forEach(function (d, k) { d.setAttribute('aria-current', k === cur ? 'true' : 'false'); });
       }
       function stop() { if (timer) { clearInterval(timer); timer = null; } }
